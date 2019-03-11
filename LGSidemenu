@@ -1,0 +1,28 @@
+pod 'LGSideMenuController'
+
+// Appdelegate
+
+let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+let login: HomeViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                
+let homeNavigation = UINavigationController(rootViewController: login)
+                
+let sideMenuVC = mainStoryboard.instantiateViewController(withIdentifier: "SideMenuVC") as! SideMenuVC
+                
+let controller = LGSideMenuController.init(rootViewController: homeNavigation, leftViewController: sideMenuVC, rightViewController: nil)
+                
+self.window?.rootViewController = controller
+                
+self.window?.makeKeyAndVisible()
+
+// sideMenu 
+
+
+let appdelegate = UIApplication.shared.delegate as! AppDelegate
+
+let controller = appdelegate.window?.rootViewController as! LGSideMenuController
+let navigation = controller.rootViewController as! UINavigationController
+
+let profileVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+navigation.viewControllers = [profileVC]
+self.sideMenuController?.hideLeftView(animated: true, completionHandler: nil)
